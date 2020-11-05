@@ -4,10 +4,32 @@
 PUSHPOPDATABASE=${PUSHPOPT:=$HOME/pushpopdb.txt}
 
 
-if [[   -v $PUSHPOPDATABASE ]] ; then
+if [[ ! -f "$PUSHPOPDATABASE" ]] ; then
   echo 'Set PUSHPOPT=/path/to/your/pushpopdb.txt'
   exit 1
 fi
+
+while getopts "lu*:" opt; do
+  case $opt in
+    l)
+      #list database
+      cat $PUSHPOPDATABASE
+      exit 0
+      ;;
+    u)
+      #undo last pop
+      echo "Undo command not implemented yet"
+      exit 0
+      ;;
+    *)
+      echo "invalid flag."
+      exit 1
+  esac
+done
+
+
+
+
 
 if [  $(wc -l < "$PUSHPOPDATABASE")  == 0 ] ; then
   echo 'Empty popt database, nothing todo!!'

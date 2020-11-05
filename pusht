@@ -7,7 +7,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 PUSHPOPDATABASE=${PUSHPOPT:=$HOME/pushpopdb.txt}
-if [[   -v $PUSHPOPDATABASE ]] ; then
+if [[ ! -f $PUSHPOPDATABASE ]] ; then
   echo "Creating new pushpop dabtabase at $PUSHPOPDATABASE"
   mkdir -p "${PUSHPOPDATABASE%/*}" && touch "$PUSHPOPDATABASE"
 fi
