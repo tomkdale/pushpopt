@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+PUSHPOPDATABASE=${PUSHPOPT:=$HOME/pushpopdb.txt}
+
+
+if [[   -v $PUSHPOPDATABASE ]] ; then
+  echo 'Set PUSHPOPT=/path/to/your/pushpopdb.txt'
+  exit 1
+fi
+
+if [  $(wc -l < "$PUSHPOPDATABASE")  == 0 ] ; then
+  echo 'Empty popt database, nothing todo!!'
+  exit 0
+fi
+tail -n 1 < $PUSHPOPDATABASE
+sed -i '$d' $PUSHPOPDATABASE
+exit 0
